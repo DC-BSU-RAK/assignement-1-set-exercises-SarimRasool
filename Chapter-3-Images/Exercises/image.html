@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Photography Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .top-gallery {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px; /* Gap between top images */
+            margin-top: 30px;
+        }
+        .bottom-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px; /* Gap between top and bottom - half of the top gap */
+            padding-bottom: 30px;
+        }
+        .image-container {
+            width: 400px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .forest-image {
+            filter: sepia(30%) saturate(140%);
+        }
+        .mountain-image {
+            filter: contrast(120%) brightness(110%);
+        }
+        .waterfall-image {
+            filter: hue-rotate(15deg) saturate(130%);
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 14px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+        .license {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tranquil Wilderness: A Nature Photography Gallery</h1>
+    
+    <div class="top-gallery">
+        <div class="image-container">
+            <img 
+                src="https://cdn.pixabay.com/photo/2018/02/01/20/59/forest-3124098_1280.jpg" 
+                alt="Morning Light in the Ancient Forest" 
+                title="Morning Light in the Ancient Forest"
+                class="forest-image">
+            <p class="caption"><strong>Morning Light in the Ancient Forest</strong> - Morning light filters through the forest trees. The gentle rays illuminate hidden paths, breathing golden warmth into the woodland's emerald sanctuary.</p>
+        </div>
+        
+        <div class="image-container">
+            <img 
+                src="https://cdn.pixabay.com/photo/2023/05/22/13/45/mount-fuji-8010752_1280.jpg" 
+                alt="Mount Fuji" 
+                title="Mount Fuji"
+                class="waterfall-image">
+            <p class="caption"><strong>Mount Fuji</strong> - Mount Fuji is Japan's tallest mountain at 3,776 meters, an iconic symmetrical stratovolcano located southwest of Tokyo that holds sacred status in Japanese culture.</p>
+        </div>
+    </div>
+    
+    <div class="bottom-container">
+        <div class="image-container">
+            <img 
+                src="https://cdn.pixabay.com/photo/2016/11/13/13/47/snowy-landscape-1821037_1280.jpg" 
+                alt="Pine Trees on a Snowy Mountain" 
+                title="Pine Trees on a Snowy Mountain"
+                class="mountain-image">
+            <p class="caption"><strong>Pine Trees on a Snowy Mountain</strong> - The Pine Trees look strong and beautiful on the snowy mountain. Their green branches covered in white snow show how tough they are in winter. They stand tall against the cold, bringing life to the quiet, white mountain.</p>
+        </div>
+    </div>
+</body>
+</html>
