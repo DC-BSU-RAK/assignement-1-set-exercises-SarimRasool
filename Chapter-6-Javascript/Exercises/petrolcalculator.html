@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta information for the document -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petrol Cost Calculator</title>
+    <style>
+        /* Main styling for the entire document */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Calculator container styling */
+        .calculator-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Subtle hover effect for the calculator container */
+        .calculator-container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Header styling */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 600;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 15px;
+        }
+
+        /* Form group styling for consistent spacing */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Label styling */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        /* Input field styling */
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        /* Input focus state styling */
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Button styling */
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        /* Button hover state styling */
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Button active state styling */
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Result display area styling */
+        .result-container {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        /* Styling for the total cost display */
+        #totalCost {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        /* Accent color for cost amount to make it stand out */
+        .cost-amount {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        /* Small icon for visual enhancement */
+        .fuel-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #3498db;
+            border-radius: 50%;
+            margin-right: 8px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .fuel-icon::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background-color: white;
+            top: 6px;
+            left: 8px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container for the calculator -->
+    <div class="calculator-container">
+        <h1>Petrol Cost Calculator</h1>
+
+        <!-- Input form for the calculator -->
+        <div class="form-group">
+            <label for="costPerLiter">Cost per liter (AED):</label>
+            <!-- Input field for cost per liter with default value 1.72 -->
+            <input type="number" id="costPerLiter" value="1.72" step="0.01" min="0">
+        </div>
+
+        <div class="form-group">
+            <label for="liters">Liters purchased:</label>
+            <!-- Input field for liters purchased with default value 0 -->
+            <input type="number" id="liters" value="0" step="0.01" min="0">
+        </div>
+
+        <!-- Calculate button that triggers the calculation -->
+        <button id="calculateBtn">Calculate Total Cost</button>
+
+        <!-- Result display container -->
+        <div class="result-container">
+            <!-- Paragraph tag to display the total cost -->
+            <p id="totalCost">
+                <span class="fuel-icon"></span>
+                Total Cost: <span class="cost-amount">AED 0.00</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript for the calculator functionality -->
+    <script>
+        // Wait for the DOM to be fully loaded before adding event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to the DOM elements we need to work with
+            const costPerLiterInput = document.getElementById('costPerLiter');
+            const litersInput = document.getElementById('liters');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const totalCostElement = document.getElementById('totalCost');
+            
+            // Add click event listener to the calculate button
+            calculateBtn.addEventListener('click', calculateTotalCost);
+            
+            // Function to calculate the total cost
+            function calculateTotalCost() {
+                // Get the values from the input fields
+                const costPerLiter = parseFloat(costPerLiterInput.value);
+                const liters = parseFloat(litersInput.value);
+                
+                // Check if inputs are valid numbers
+                if (isNaN(costPerLiter) || isNaN(liters)) {
+                    totalCostElement.innerHTML = '<span class="fuel-icon"></span>Please enter valid numbers';
+                    return;
+                }
+                
+                // Calculate the total cost
+                const totalCost = costPerLiter * liters;
+                
+                // Format the total cost to 2 decimal places
+                const formattedCost = totalCost.toFixed(2);
+                
+                // Update the total cost display
+                totalCostElement.innerHTML = `<span class="fuel-icon"></span>Total Cost: <span class="cost-amount">AED ${formattedCost}</span>`;
+            }
+            
+            // Initial calculation on page load
+            calculateTotalCost();
+        });
+    </script>
+</body>
+</html>
